@@ -8,13 +8,13 @@ export const UPDATE_TOY = 'UPDATE_TOY'
 export const TOY_UNDO = 'TOY_UNDO'
 
 //* Shopping cart
-export const TOGGLE_CART_IS_SHOWN = 'TOGGLE_CART_IS_SHOWN'
-export const ADD_TOY_TO_CART = 'ADD_TOY_TO_CART'
-export const REMOVE_TOY_FROM_CART = 'REMOVE_TOY_FROM_CART'
-export const CLEAR_CART = 'CLEAR_CART'
+// export const TOGGLE_CART_IS_SHOWN = 'TOGGLE_CART_IS_SHOWN'
+// export const ADD_TOY_TO_CART = 'ADD_TOY_TO_CART'
+// export const REMOVE_TOY_FROM_CART = 'REMOVE_TOY_FROM_CART'
+// export const CLEAR_CART = 'CLEAR_CART'
 
-export const SET_FILTER_BY = 'SET_FILTER_BY'
-export const SET_IS_LOADING = 'SET_IS_LOADING'
+// export const SET_FILTER_BY = 'SET_FILTER_BY'
+// export const SET_IS_LOADING = 'SET_IS_LOADING'
 
 const initialState = {
     toys: [],
@@ -22,21 +22,22 @@ const initialState = {
     shoppingCart: [],
     isLoading: false,
     filterBy: toyService.getDefaultFilter(),
-    lastCars: []
+    lastToys: []
 }
 
 export function toyReducer(state = initialState, action = {}) {
     switch (action.type) {
-        //* Cars
+        //* Toys
         case SET_TOYS:
             return { ...state, toys: action.toys }
-        case REMOVE_TOY:
-            const lastCars = [...state.toys]
+        case REMOVE_TOY: {
+            const lastToys = [...state.toys]
             return {
                 ...state,
                 toys: state.toys.filter(toy => toy._id !== action.toyId),
-                lastCars
+                lastToys: lastToys
             }
+        }
         case ADD_TOY:
 
             return {
@@ -50,39 +51,39 @@ export function toyReducer(state = initialState, action = {}) {
             }
 
         //* Shopping cart
-        case TOGGLE_CART_IS_SHOWN:
-            return { ...state, isCartShown: !state.isCartShown }
+        // case TOGGLE_CART_IS_SHOWN:
+        //     return { ...state, isCartShown: !state.isCartShown }
 
-        case ADD_TOY_TO_CART:
-            return {
-                ...state,
-                shoppingCart: [...state.shoppingCart, action.toy]
-            }
+        // case ADD_TOY_TO_CART:
+        //     return {
+        //         ...state,
+        //         shoppingCart: [...state.shoppingCart, action.toy]
+        //     }
 
-        case REMOVE_TOY_FROM_CART:
-            const shoppingCart = state.shoppingCart.filter(toy => toy._id !== action.toyId)
-            return { ...state, shoppingCart }
+        // case REMOVE_TOY_FROM_CART:
+        //     const shoppingCart = state.shoppingCart.filter(toy => toy._id !== action.toyId)
+        //     return { ...state, shoppingCart }
 
 
-        case CLEAR_CART:
-            return { ...state, shoppingCart: [] }
+        // case CLEAR_CART:
+        //     return { ...state, shoppingCart: [] }
 
-        case SET_FILTER_BY:
-            return {
-                ...state,
-                filterBy: { ...state.filterBy, ...action.filterBy }
-            }
+        // case SET_FILTER_BY:
+        //     return {
+        //         ...state,
+        //         filterBy: { ...state.filterBy, ...action.filterBy }
+        //     }
 
-        case SET_IS_LOADING:
-            return {
-                ...state,
-                isLoading: action.isLoading
-            }
-        case TOY_UNDO:
-            return {
-                ...state,
-                toys: [...state.lastCars]
-            }
+        // case SET_IS_LOADING:
+        //     return {
+        //         ...state,
+        //         isLoading: action.isLoading
+        //     }
+        // case TOY_UNDO:
+        //     return {
+        //         ...state,
+        //         toys: [...state.lastToys]
+        //     }
 
 
         default:
