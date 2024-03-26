@@ -2,6 +2,8 @@ import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 // import { userService } from './user.service.js'
 
+//! This service does not use http
+
 const STORAGE_KEY = 'toyDB'
 
 export const toyService = {
@@ -48,9 +50,9 @@ function save(toy) {
 
 function getEmptyToy() {
   return {
-    name: getRandomToyName(),
+    name: _getRandomToyName(),
     price: utilService.getRandomIntInclusive(50, 200),
-    labels: getRandomToyLabels(),
+    labels: _getRandomToyLabels(),
     createdAt: Date.now(),
     inStock: true,
   }
@@ -60,7 +62,7 @@ function getDefaultFilter() {
   return { txt: '', maxPrice: '' }
 }
 
-function getRandomToyName() {
+function _getRandomToyName() {
   const toyNames = [
     "Turbo Twister",
     "Robo-Racer",
@@ -83,7 +85,7 @@ function getRandomToyName() {
   return toyNames[randomToyIdx]
 }
 
-function getRandomToyLabels() {
+function _getRandomToyLabels() {
   const labels = [
     'On wheels',
     'Box game',

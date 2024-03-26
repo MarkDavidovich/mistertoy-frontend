@@ -8,7 +8,7 @@ import { toyReducer } from "./reducers/toy.reducer.js"
 //TODO add user reducer
 
 const rootReducer = combineReducers({
-  carModule: toyReducer,
+  toyModule: toyReducer,
   //TODO add user module
 })
 

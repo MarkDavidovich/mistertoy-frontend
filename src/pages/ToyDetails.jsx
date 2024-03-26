@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react"
 import { Link, useParams, useNavigate } from "react-router-dom"
-import { useDispatch } from 'react-redux'
-import { GET_TOY_BY_ID } from "../store/reducers/toy.reducer.js"
+import { useSelector } from 'react-redux'
 
 export function ToyDetails() {
   const [toy, setToy] = useState(null)
   const { toyId } = useParams()
+  const { toys } = useSelector(storeState => storeState.toyModule)
 
-  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -16,20 +15,12 @@ export function ToyDetails() {
   }, [toyId])
 
   function loadToy() {
-    const toy = dispatch({ GET_TOY_BY_ID, toyId })
+    const currentToy = toys.filter(toy => toy._id === toyId)[0]
+    console.log('toys:', toys)
+    console.log(currentToy)
+    if (!currentToy) navigate('/toy')
+    setToy(currentToy)
 
-    if (!toy) {
-      console.log('could not get toy details')
-      navigate('/toy')
-    }
-    setToy(toy)
-
-    // toyService.getById(toyId)
-    //   .then(toy => setToy(toy))
-    //   .catch(err => {
-    //     console.log('Had issues in toy details', err)
-    // navigate('/toy')
-    //   })
   }
 
   if (!toy) return <div>Loading...</div>
