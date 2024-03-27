@@ -2,23 +2,26 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
 import { toyService } from "../services/toy.service.js"
-// import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 import { saveToy } from "../store/actions/toy.actions.js"
 
 export function ToyEdit() {
+  const [toyToEdit, setToyToEdit] = useState(toyService.getEmptyToy())
+
   const navigate = useNavigate()
-  const [toyToEdit, setToyToEdit] = useState()
+
   const { toyId } = useParams()
 
   useEffect(() => {
-    if (toyId) loadToy()
+    if (!toyId) return
+    loadToy()
   }, [])
 
   function loadToy() {
     toyService.getById(toyId)
       .then(toy => setToyToEdit(toy))
       .catch(err => {
-        console.log('Had issues in toy edit', err)
+        showErrorMsg('Had issues in toy edit', err)
         navigate('/toy')
       })
   }
@@ -32,49 +35,58 @@ export function ToyEdit() {
   function onSaveToy(ev) {
     ev.preventDefault()
     if (!toyToEdit.price) toyToEdit.price = 100
-    saveToy(toyToEdit)
+    const toyToSave = {
+      ...toyToEdit,
+      inStock: (toyToEdit.inStock) ? true : false
+    }
+
+    saveToy(toyToSave)
       .then(() => {
-        console.log('Toy saved!')
-        // showSuccessMsg('toy Saved!')
+        showSuccessMsg('toy Saved!')
         navigate('/toy')
       })
       .catch(err => {
-        console.log('Had issues in toy details', err)
-        // showErrorMsg('Had issues in toy details')
+        showErrorMsg('Had issues in toy details', err)
       })
   }
 
-  return (
-    <section className="toy-edit">
-      {!toyToEdit && <h1>loading...</h1>}
-      {toyToEdit &&
-        <>
-          <h2>{toyToEdit._id ? 'Edit' : 'Add'} Toy</h2>
-          <form onSubmit={onSaveToy} >
-            <label htmlFor="toyName">Name: </label>
-            <input type="text"
-              name="toyName"
-              id="toyName"
-              placeholder="Enter toy name..."
-              value={toyToEdit.name}
-              onChange={handleChange}
-            />
-            <label htmlFor="price">Price: </label>
-            <input type="number"
-              name="price"
-              id="price"
-              placeholder="Enter price"
-              value={toyToEdit.price}
-              onChange={handleChange}
-            />
+  function isInStock() {
+    return toyToEdit.inStock
+  }
 
-            <div>
-              <button>{toyToEdit._id ? 'Save' : 'Add'}</button>
-              <Link to="/toy">Cancel</Link>
-            </div>
-          </form>
-        </>
-      }
-    </section>
+  if (!toyToEdit) return <div>Loading...</div>
+
+  return (
+    <form onSubmit={onSave} className="container edit-form" action="">
+      <div>
+        <label>
+          <span>Name </span>
+          <input
+            className="edit-input name-input"
+            value={toyToEdit.name}
+            onChange={handleChange}
+            type="text"
+            name="name" />
+        </label>
+      </div>
+      <div>
+        <label>
+          <span>Price </span>
+          <input
+            className="edit-input price-input"
+            value={toyToEdit.price}
+            onChange={handleChange}
+            type="number"
+            name="price" />
+        </label>
+      </div>
+      <div>
+        <select value={isInStock()} onChange={handleChange} name="inStock" className='edit-input'>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </div>
+      <button onClick={onSave} className="save-toy-btn">Save</button>
+    </form>
   )
 }

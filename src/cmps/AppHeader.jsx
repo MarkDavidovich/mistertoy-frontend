@@ -1,15 +1,14 @@
 import { NavLink } from 'react-router-dom'
+import React from 'react'
 
 export function AppHeader() {
 
   return (
-    <header className="app-header full main-layout">
-      <section className="header-container">
+    <header className="main-header">
+      <section className="header-nav container">
         <h1>Toys app!</h1>
-        <nav className="app-nav">
-          <NavLink to="/" >Home</NavLink>
-          <NavLink to="/toy" >Toys</NavLink>
-        </nav>
+        <NavLink to="/" >Home</NavLink>
+        <NavLink to="/toy" >Toys</NavLink>
       </section>
     </header>
   )

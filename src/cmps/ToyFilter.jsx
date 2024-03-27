@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react"
 import { utilService } from "../services/util.service.js"
 
@@ -18,10 +17,10 @@ export function ToyFilter({ filterBy, onSetFilter }) {
   }
 
   return (
-    <section className="toy-filter full main-layout">
+    <section className="filter-container">
       <h2>Toys Filter</h2>
       <form >
-        <label htmlFor="toyName">Name:</label>
+        <label htmlFor="toyName"></label>
         <input type="text"
           id="toyName"
           name="txt"
@@ -30,7 +29,7 @@ export function ToyFilter({ filterBy, onSetFilter }) {
           onChange={handleChange}
         />
 
-        <label htmlFor="maxPrice">Max price:</label>
+        <label htmlFor="maxPrice"></label>
         <input type="number"
           id="maxPrice"
           name="maxPrice"

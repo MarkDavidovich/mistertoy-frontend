@@ -1,15 +1,23 @@
-import { Link } from "react-router-dom"
+import React from 'react'
 
-export function ToyPreview({ toy }) {
-  return (
-    <article>
-      <h4>{toy.name}</h4>
-      <p>Price: <span>${toy.price}</span></p>
-      {/* {toy.owner && <p>Owner: <Link to={`/user/${toy.owner._id}`}>{toy.owner.fullname}</Link></p>} */}
-      <hr />
-      <Link to={`/toy/edit/${toy._id}`}>Edit</Link> &nbsp; | &nbsp;
-      <Link to={`/toy/${toy._id}`}>Details</Link>
+export function ToyPreview({ toy, onRemove }) {
+  return (<>
+    <button onClick={() => onRemove(toy._id)} className="btn-remove">X</button>
+    <div className='toy-name'>
+      {toy.name}
+    </div>
+    <div className='toy-labels'>
+      {toy.labels.map(label => (<span key={label}>{label}</span>))}
+    </div>
 
-    </article>
+    <img src={`https://robohash.org/${toy.name}`} alt="toy" />
+
+    <div>
+      In Stock: {(toy.inStock) ? 'Yes' : 'No'}
+    </div>
+    <div>
+      Price: {`${toy.price}`}
+    </div>
+  </>
   )
 }

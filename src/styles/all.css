@@ -1,0 +1,52 @@
+.filter-container {
+  padding: 2.5rem;
+  box-shadow: -1px 1px 2px 0px #1783ff;
+  transition: 0.1s;
+  align-items: baseline;
+}
+
+.filter-container:hover {
+  box-shadow: -1px 1px 5px 0px #1783ff;
+}
+
+.toy-card {
+  background-color: #ff9317 !important;
+  transition: background-color 0.2s !important;
+  width: 100%;
+  justify-self: center;
+}
+
+.toy-card .delete-card {
+  color: #ff3c00;
+  transition: 0.2s;
+}
+
+.toy-card .delete-card:hover {
+  color: #f00;
+  background-color: #1783ff;
+}
+
+.toy-card .toy-labels :not(:last-child) {
+  margin-inline-end: 1em;
+}
+
+.toy-prev-btns .btn-link {
+  width: 30%;
+  height: 20%;
+  margin: 0.6rem;
+  padding: 0px;
+  border-radius: 1%;
+}
+
+.toy-prev-btns .btn-link a {
+  color: gray;
+  transition: 0.2s;
+}
+
+.toy-prev-btns .btn-link:hover {
+  background-color: #07f;
+}
+
+.btn-link:hover a {
+  color: #1783ff;
+}

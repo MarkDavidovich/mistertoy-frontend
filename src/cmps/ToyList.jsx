@@ -1,23 +1,21 @@
 import { ToyPreview } from "./ToyPreview.jsx"
+import { NavLink } from 'react-router-dom'
 
 export function ToyList({ toys, onRemoveToy, onEditToy, }) {
   console.log('List rendered')
 
   return (
-    <ul className="toy-list">
+    <div className="toy-list">
       {toys.map(toy =>
-        <li className="toy-preview" key={toy._id}>
-          <ToyPreview toy={toy} />
+        <div className="toy-card" key={toy._id} >
+          <ToyPreview toy={toy} onRemove={onRemove} />
 
-          <div>
-            <button onClick={() => onRemoveToy(toy._id)}>x</button>
-            <button onClick={() => onEditToy(toy)}>Edit</button>
-          </div>
-
-          {/* <button className="buy" onClick={() => addToCart(toy)}>
-            Add to Cart
-          </button> */}
-        </li>)}
-    </ul>
+          <section className="toy-prev-btns">
+            <NavLink to={`/toy/edit/${toy._id}`}>Edit</NavLink>
+            <NavLink to={`/toy/details/${toy._id}`}>Details</NavLink>
+          </section>
+        </div>
+      )}
+    </div>
   )
 }
