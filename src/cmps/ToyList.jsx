@@ -1,7 +1,7 @@
 import { ToyPreview } from "./ToyPreview.jsx"
 import { NavLink } from 'react-router-dom'
 
-export function ToyList({ toys, onRemoveToy, onEditToy, }) {
+export function ToyList({ toys, onRemove }) {
   console.log('List rendered')
 
   return (

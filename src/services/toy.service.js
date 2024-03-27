@@ -36,12 +36,12 @@ function getById(toyId) {
 }
 
 function remove(toyId) {
-  return httpService.remove(`toy/${toyId}`)
+  return httpService.delete(`toy/${toyId}`)
 }
 
 function save(toy) {
   if (toy._id) {
-    return storageService.put(`toy/${toy._id}`, toy)
+    return httpService.put(`toy/${toy._id}`, toy)
   } else {
     return httpService.post('toy', toy)
   }

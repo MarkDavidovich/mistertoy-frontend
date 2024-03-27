@@ -15,6 +15,7 @@ export function ToyIndex() {
   const navigate = useNavigate()
   const toys = useSelector(storeState => storeState.toyModule.toys)
   const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
+  const sortBy = useSelector(storeState => storeState.toyModule.sortBy)
 
   useEffect(() => {
     loadToys(filterBy, sortBy)
@@ -34,7 +35,7 @@ export function ToyIndex() {
     setSortBy(sortBy)
   }
 
-  function onRemoveToy(toyId) {
+  function onRemove(toyId) {
     removeToy(toyId)
       .then(() => {
         showSuccessMsg('Toy removed')
@@ -48,17 +49,15 @@ export function ToyIndex() {
 
   return (
     <div className='toy-app'>
-      <h3>Toys App</h3>
       <section className='main-control-container'>
         <Link to="/toy/edit" className='add-btn'>Add Toy</Link>
         <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
         <ToySort sortBy={sortBy} onSetSort={onSetSort} />
-        <ToyList
-          toys={toys}
-          onRemoveToy={onRemoveToy}
-        />
-        <hr />
       </section>
+      <ToyList
+        toys={toys}
+        onRemove={onRemove}
+      />
     </div>
   )
 }

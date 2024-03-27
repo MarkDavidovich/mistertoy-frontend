@@ -32,7 +32,7 @@ export function ToyEdit() {
     setToyToEdit((prevToy) => ({ ...prevToy, [field]: value }))
   }
 
-  function onSaveToy(ev) {
+  function onSave(ev) {
     ev.preventDefault()
     if (!toyToEdit.price) toyToEdit.price = 100
     const toyToSave = {

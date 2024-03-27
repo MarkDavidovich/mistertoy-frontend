@@ -1,12 +1,13 @@
 .filter-container {
   padding: 2.5rem;
-  box-shadow: -1px 1px 2px 0px #1783ff;
+  border: 1px solid gray;
+  border-radius: 5px;
   transition: 0.1s;
   align-items: baseline;
 }
 
 .filter-container:hover {
-  box-shadow: -1px 1px 5px 0px #1783ff;
+  /* box-shadow: -1px 1px 5px 0px #b1b1b1; */
 }
 
 .toy-card {

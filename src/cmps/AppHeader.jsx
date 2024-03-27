@@ -7,8 +7,10 @@ export function AppHeader() {
     <header className="main-header">
       <section className="header-nav container">
         <h1>Toys app!</h1>
-        <NavLink to="/" >Home</NavLink>
-        <NavLink to="/toy" >Toys</NavLink>
+        <div className='nav-btns'>
+          <NavLink to="/" >Home</NavLink>
+          <NavLink to="/toy" >Toys</NavLink>
+        </div>
       </section>
     </header>
   )

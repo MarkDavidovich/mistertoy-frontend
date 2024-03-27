@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background-color: rgb(255 0 0 / 0.01);
+  background-color: rgb(216, 102, 27);
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -34,8 +34,8 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 200px;
-  background-color: rgb(23, 131, 255);
+  height: 100px;
+  background-color: #fdaa2e;
 }
 
 .header-link {
@@ -62,7 +62,7 @@ button {
   margin-right: 5px;
 }
 
-.btn-add {
+.add-btn {
   background-color: lightblue;
   max-width: 90px;
   color: black;
@@ -89,15 +89,12 @@ button {
   cursor: pointer;
 }
 
-/* ToyApp */
-
 .toy-list {
   display: grid;
   margin: 3rem;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-auto-rows: auto;
   column-gap: 3rem;
-  row-gap: 3rem;
 }
 
 .toy-card {
@@ -105,10 +102,11 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  margin: 50px;
+  margin: 5px;
   padding: 20px;
   max-width: 300px;
-  word-wrap: break-word;
+  /* word-wrap: break-word; */
+  border-radius: 8px;
 }
 
 .toy-card img {
@@ -117,7 +115,7 @@ button {
 
 .main-control-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 10px;
@@ -173,7 +171,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  align-content: center;
+  align-content: center
 }
 
 .name-input,
@@ -277,4 +275,21 @@ button.save-toy-btn:hover {
   padding: 5px;
   border: 1px solid black;
   background: white;
+}
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+}
+
+.header-nav {
+  display: flex;
+  /* background-color: red; */
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-nav .nav-btns a {
+  margin: 10px;
 }
