@@ -5,18 +5,23 @@ export const SET_TOYS = 'SET_TOYS'
 export const REMOVE_TOY = 'REMOVE_TOY'
 export const ADD_TOY = 'ADD_TOY'
 export const UPDATE_TOY = 'UPDATE_TOY'
+export const SET_LABLES = 'SET_LABLES'
 
 export const SET_FILTER_BY = 'SET_FILTER_BY'
 export const SET_SORTBY = 'SET_SORTBY'
+export const SET_IS_LOADING = 'SET_IS_LOADING'
+
 
 const initialState = {
   toys: [],
   filterBy: toyService.getDefaultFilter(),
-  sortBy: toyService.getDefaultSort()
+  sortBy: toyService.getDefaultSort(),
+  lables: ['Doll', 'Art', 'Battery Powered', 'Talking', 'Beauty', 'Girls', 'Animal', 'Trip', 'Sport', 'Ride']
 }
 
 export function toyReducer(state = initialState, action) {
   let toys
+
   switch (action.type) {
     case SET_TOYS:
       return { ...state, toys: action.toys }
@@ -40,6 +45,9 @@ export function toyReducer(state = initialState, action) {
         ...state,
         sortBy: { ...state.sortBy, ...action.sortBy }
       }
+    case SET_IS_LOADING:
+      return { ...state, isLoading: action.isLoading }
+
     default:
       return state
   }

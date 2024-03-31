@@ -1,0 +1,44 @@
+.toy {
+    &-list {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        columns: 4;
+        padding: 0.8rem;
+        gap: 1.1em;
+        background-color: rgb(250, 250, 250);
+    }
+
+    &-preview {
+        border: 1px black;
+        min-height: 500px;
+
+        .editing-toy-btn {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+
+        }
+
+
+
+
+        // >* {
+        //     color: black;
+        // }
+    }
+
+
+    .editing-toy {
+        width: 100%;
+
+        &-btn {
+            display: flex;
+            justify-content: space-between;
+
+            // button {
+            //     width: 60%;
+            // }
+        }
+    }
+}

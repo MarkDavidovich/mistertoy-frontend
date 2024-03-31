@@ -1,23 +1,39 @@
 import React from 'react'
 
 export function ToyPreview({ toy, onRemove }) {
-  return (<>
-    <button onClick={() => onRemove(toy._id)} className="btn-remove">X</button>
-    <div className='toy-name'>
-      {toy.name}
-    </div>
-    <div className='toy-labels'>
-      {toy.labels.map(label => (<span key={label}>{label}</span>))}
-    </div>
+  const { name, inStock, price, labels, _id } = toy
+  return (
+    <>
+      <button onClick={() => onRemove(_id)} className="btn-remove">X</button>
+      <section className="toy-detail-preview">
+        <div className='toy-name'>
+          {name}
+        </div>
+        <div className='toy-labels'>
+          {labels.map(label => (<span key={label}>{label}</span>))}
+        </div>
 
-    <img src={`https://robohash.org/${toy.name}`} alt="toy" />
+        <img src={`https://robohash.org/${name}`} alt="toy" />
 
-    <div>
-      In Stock: {(toy.inStock) ? 'Yes' : 'No'}
-    </div>
-    <div>
-      Price: {`${toy.price}`}
-    </div>
-  </>
+        <div>
+          In Stock: {(inStock) ? 'Yes' : 'No'}
+        </div>
+        <div>
+          Price: {`${price}`}
+        </div>
+        <div className="editing-toy-btn">
+          {user && user.isAdmin && (
+            <>
+              <Link to={`/toy/edit/${_id}`}>
+                <button size="small">Edit</button>
+              </Link>
+            </>
+          )}
+          <Link to={`/toy/details/${_id}`}>
+            <button className='learn-btn' size="small">Learn More</button>
+          </Link>
+        </div>
+      </section>
+    </>
   )
 }

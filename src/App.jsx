@@ -1,24 +1,33 @@
-import React from 'react'
-import { Route, Routes } from 'react-router'
-import { ToyIndex } from './pages/ToyIndex'
-import { ToyEdit } from './pages/ToyEdit'
-import { ToyDetails } from './pages/ToyDetails'
-import { HomePage } from './pages/HomePage'
-import { UserMsg } from './cmps/UserMsg'
-import { AppHeader } from './cmps/AppHeader'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import './assets/style/main.scss'
+
+import { AppHeader } from './cmps/AppHeader.jsx'
+import { HomePage } from './pages/HomePage.jsx'
+import { store } from './store/store.js'
+import { ToyIndex } from './pages/ToyIndex.jsx'
+import { ToyEdit } from './pages/ToyEdit.jsx'
+import { ToyDetails } from './pages/ToyDetails.jsx'
+import { Dashboard } from './pages/Dashboard.jsx'
 
 export function App() {
-  return <main className="main-toy-app">
-    <AppHeader />
-    <Routes>
-      <Route element={<ToyDetails />} path="/toy/details/:toyId" />
-      <Route element={<ToyEdit />} path="/toy/edit/:toyId?" />
-      <Route element={<ToyIndex />} path="/toy" />
-      <Route element={<HomePage />} path="/" />
-    </Routes>
-
-    <UserMsg />
-  </main >
-
+  return (
+    <Provider store={store}>
+      <Router>
+        <div>
+          <AppHeader />
+          <main>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/toy" element={<ToyIndex />} />
+              <Route path="/toy/details/:toyId" element={<ToyDetails />} />
+              <Route path="/toy/edit/:toyId" element={<ToyEdit />} />
+              <Route path="/toy/edit" element={<ToyEdit />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+          </main>
+        </div>
+      </Router>
+    </Provider>
+  )
 }
-

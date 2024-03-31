@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 400;
+}
+
+body {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+button {
+    background-color: rgb(232, 231, 231);
+    font-family: inherit;
+    padding: 0.3em 0.6em;
+    border: 0.5px solid black;
+    // border-radius: 0.4em;
+    box-shadow: 1px 1px;
+    background-color: rgba(192, 238, 237, 0.804);
+
+    &:hover {
+        transform: translate(-0.05em, -0.05em);
+        box-shadow: 0.15em 0.15em;
+        cursor: pointer;
+    }
+
+    &:active {
+        transform: translate(0.05em, 0.05em);
+        box-shadow: 0.05em 0.05em;
+    }
+}

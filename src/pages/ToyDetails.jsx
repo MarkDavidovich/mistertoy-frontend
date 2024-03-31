@@ -1,34 +1,26 @@
 import { useEffect, useState } from "react"
 import { Link, useParams, useNavigate } from "react-router-dom"
 
-import { showErrorMsg } from '../services/event-bus.service'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { toyService } from '../services/toy.service'
 
 export function ToyDetails() {
   const [toy, setToy] = useState(null)
   const { toyId } = useParams()
-  // const toys = useSelector(storeState => storeState.toyModule.toys)
-
   const navigate = useNavigate()
 
   useEffect(() => {
     if (toyId) loadToy()
   }, [toyId])
 
-  function loadToy() {
-    toyService.getById(toyId)
-      .then(setToy)
-      .catch((err) => {
-        showErrorMsg('Can\'t load toy', err)
-        navigate('/toy')
-      })
-
-    // const currentToy = toys.filter(toy => toy._id === toyId)[0]
-    // console.log('toys:', toys)
-    // console.log(currentToy)
-    // if (!currentToy) navigate('/toy')
-    // setToy(currentToy)
-
+  async function loadToy() {
+    try {
+      const toy = await toyService.getById(toyId)
+      setToy(toy)
+    } catch (err) {
+      showErrorMsg('Can\'t load toy', err)
+      navigate('/toy')
+    }
   }
 
   if (!toy) return <div>Loading...</div>

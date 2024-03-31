@@ -1,0 +1,20 @@
+.toy-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 100px;
+    }
+
+    .back-btn {
+        border: 1px solid gray;
+        border-radius: 10px;
+        padding: 10px;
+
+        &:hover {
+            border-color: lightgray;
+        }
+    }
+}

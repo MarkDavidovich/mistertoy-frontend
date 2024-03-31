@@ -1,5 +1,7 @@
-import { utilService } from './util.service.js'
+// import { utilService } from './util.service.js'
 import { httpService } from './http.service.js'
+
+const BASE_URL = 'toy/'
 
 export const toyService = {
   query,
@@ -9,41 +11,25 @@ export const toyService = {
   getEmptyToy,
   getDefaultFilter,
   getDefaultSort,
-  getLabels
 }
-
-const labels = [
-  'On wheels',
-  'Box game',
-  'Art',
-  'Baby',
-  'Doll',
-  'Puzzle',
-  'Outdoor',
-  'Battery Powered'
-]
 
 function query(filterBy, sort) {
   return httpService.get('toy', { params: { filterBy, sort } })
 }
 
-function getLabels() {
-  return [...labels]
-}
-
 function getById(toyId) {
-  return httpService.get(`toy/${toyId}`)
+  return httpService.get(BASE_URL + toyId)
 }
 
 function remove(toyId) {
-  return httpService.delete(`toy/${toyId}`)
+  return httpService.delete(BASE_URL + toyId)
 }
 
 function save(toy) {
   if (toy._id) {
-    return httpService.put(`toy/${toy._id}`, toy)
+    return httpService.put(BASE_URL + toy._id, toy)
   } else {
-    return httpService.post('toy', toy)
+    return httpService.post(BASE_URL, toyId)
   }
 }
 
@@ -52,7 +38,7 @@ function getEmptyToy() {
     name: '',
     price: '',
     labels: [],
-    // createdAt: Date.now(),
+    createdAt: Date.now(),
     inStock: true,
   }
 }

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
@@ -6,25 +6,18 @@ import { useEffect } from 'react'
 import { ToyFilter } from '../cmps/ToyFilter.jsx'
 import { ToySort } from '../cmps/ToySort.jsx'
 import { ToyList } from '../cmps/ToyList.jsx'
-import { toyService } from '../services/toy.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { loadToys, removeToy, saveToy, setFilterBy, setSortBy } from '../store/actions/toy.actions.js'
-
+import { loadToys, removeToy, setFilterBy, setSortBy } from '../store/actions/toy.actions.js'
 
 export function ToyIndex() {
-  const navigate = useNavigate()
   const toys = useSelector(storeState => storeState.toyModule.toys)
   const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
   const sortBy = useSelector(storeState => storeState.toyModule.sortBy)
+  const user = useSelector((storeState) => storeState.userModule.loggedinUser)
+  const isLoading = useSelector((storeState) => storeState.toyModule.isLoading)
 
   useEffect(() => {
     loadToys(filterBy, sortBy)
-      .then(() => {
-        showSuccessMsg('Toys loaded successfully')
-      })
-      .catch((err) => {
-        showErrorMsg('Could not low toys', err)
-      })
   }, [filterBy, sortBy])
 
   function onSetFilter(filterBy) {
@@ -35,29 +28,34 @@ export function ToyIndex() {
     setSortBy(sortBy)
   }
 
-  function onRemove(toyId) {
-    removeToy(toyId)
-      .then(() => {
-        showSuccessMsg('Toy removed')
-      })
-      .catch(err => {
-        showErrorMsg('Cannot remove toy', err)
-      })
+  async function onRemove(toyId) {
+    try {
+      await removeToy(toyId)
+      showSuccessMsg('Toy removed')
+    } catch (err) {
+      showErrorMsg('Cannot remove toy', err)
+    }
   }
 
-  if (!toys || !toys.length) return <div>Loading...</div>
-
   return (
-    <div className='toy-app'>
-      <section className='main-control-container'>
-        <Link to="/toy/edit" className='add-btn'>Add Toy</Link>
+    <div className='toy-container'>
+      <section className='main-container'>
+        {user && user.isAdmin && (
+          <button className="add-btn">
+            <Link to="/toy/edit">Add new toy</Link>
+          </button>
+        )}
         <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
         <ToySort sortBy={sortBy} onSetSort={onSetSort} />
       </section>
-      <ToyList
-        toys={toys}
-        onRemove={onRemove}
-      />
+      {!isLoading && (
+        <ToyList
+          toys={toys}
+          user={user}
+          onRemove={onRemove}
+        />
+      )}
+      {isLoading && <div>Loading...</div>}
     </div>
   )
 }
