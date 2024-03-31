@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function ToyPreview({ toy, onRemove }) {
+export function ToyPreview({ toy, user, onRemove }) {
   const { name, inStock, price, labels, _id } = toy
   return (
     <>
