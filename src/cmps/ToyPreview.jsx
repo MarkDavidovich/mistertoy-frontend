@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export function ToyPreview({ toy, user, onRemove }) {
   const { name, inStock, price, labels, _id } = toy
