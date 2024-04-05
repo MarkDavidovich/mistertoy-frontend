@@ -3,11 +3,14 @@ import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { LoginSignup } from './LoginSignup.jsx'
 import { logout } from '../store/actions/user.actions'
+import { loadToys, setFilterBy, setSortBy } from '../store/actions/toy.actions.js'
+import { useEffect } from 'react'
 
 import React from 'react'
 
 export function AppHeader() {
 
+  
   const user = useSelector((storeState) => storeState.userModule.loggedinUser)
   const navigate = useNavigate()
 
